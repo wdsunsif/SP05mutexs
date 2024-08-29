@@ -1,0 +1,71 @@
+﻿<Window x:Class="SP05_Semaphore.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SP05_Semaphore"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Background="#FF1E1C2F">
+        <StackPanel Orientation="Horizontal" Height="25" Margin="0,0,0,400">
+            <TextBlock Foreground="White" Width="100" Margin="70,0,0,0" FontSize="13">Working threads</TextBlock>
+            <TextBlock Foreground="White" Width="100" Margin="170,0,0,0" FontSize="13">Waiting threads</TextBlock>
+            <TextBlock Foreground="White" Width="100" Margin="170,0,0,0" FontSize="13">Created threads</TextBlock>
+        </StackPanel>
+        <ListView
+            x:Name="Created_Threads_LV" 
+            ItemsSource="{Binding CreatedThreads,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+            SelectedItem="{Binding SelectedCreatedThread,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+            Width="200"
+            Height="300"
+            Margin="550,0,0,50"
+            MouseDoubleClick="Created_Threads_LV_MouseDoubleClick" 
+            Background="#FFBBBBBB" 
+            >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"></TextBlock>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <ListView
+            x:Name="WAITING_Threads_LV" 
+            ItemsSource="{Binding WaitingThreads,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+            SelectedItem="{Binding SelectedWaitingThread,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+            MouseDoubleClick="WAITING_Threads_LV_MouseDoubleClick"
+            Width="200"
+            Height="300"
+            Margin="0,0,0,50"
+            Background="#FFBBBBBB"
+            >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"></TextBlock>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <ListView
+            x:Name="Working_Threads_LV" 
+            ItemsSource="{Binding WorkingThreads,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+            Width="200"
+            Height="300"
+            Margin="0,0,550,50"
+            Background="#FFBBBBBB" 
+            >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"></TextBlock>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button 
+            Height="25" 
+            Width="100"
+            Margin="550,350,0,0" Click="Create_Button_Click"
+            >Create Thread</Button>
+        <TextBlock Foreground="White" Width="140" Height="20" Margin="50,285,560,0" Text="Places in Semaphore" FontSize="15"></TextBlock>
+        <Button x:Name="Increment_Semaphore_Place_Button" Height="19" Width="40" Margin="10,330,419,0" Click="Increment_Semaphore_Place_Button_Click" VerticalContentAlignment="Top"  >+</Button>
+        <Button x:Name="Decrement_Semaphore_Place_Button"  Height="19" Width="40" Margin="10,370,419,0" Click="Decrement_Semaphore_Place_Button_Click" >-</Button>
+        <TextBox Background="#FFBBBBBB"  Text="{Binding SempahoreMaxNumber, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" x:Name="Semaphore_Place_Number_TB" Height="38" Width="100" Margin="10,350,560,0" FontSize="20" PreviewTextInput="NumberValidationTextBox"></TextBox>
+    </Grid>
+</Window>
